@@ -47,8 +47,7 @@ public class Driver {
 		}
 		
 		
-		
-		
+//------Secret Message Stuff		
 		System.out.println("\n");
 		
 		PriorityQueue<FrequencyData> secretData = new PriorityQueue<FrequencyData>();
@@ -64,50 +63,19 @@ public class Driver {
 		
 		HuffmanTree secretTree = new HuffmanTree(secretData, false);
 		secretTree.printOut();
-//		BufferedReader br = new BufferedReader(new FileReader("compressed.huff"));
-//		String line = "";
-//		while (br.ready()) {
-//			line += br.read();
-//		}
-//		System.out.println("File Read");
-//		br.close();
 		File file = new File("compressed.huff");
 		FileInputStream fin = new FileInputStream(file);
 		byte[] secretBytes = new byte[(int)file.length()];
 		fin.read(secretBytes);
 		fin.close();
-		//byte[] secretBytes = line.getBytes();
 		byte[] secretMessage = compDecomp.decompress(secretTree, secretBytes.length, secretBytes);
 		for(int i= 0; i < secretMessage.length; i++) {
 			System.out.print(secretMessage[i]);
 		}
 		FileOutputStream image = new FileOutputStream("image.png");
 		image.write(secretMessage);
-//		
-//		 ByteArrayInputStream bis = new ByteArrayInputStream(secretMessage);
-//	        Iterator<?> readers = ImageIO.getImageReadersByFormatName("jpg");
-//	 
-//	        //ImageIO is a class containing static methods for locating ImageReaders
-//	        //and ImageWriters, and performing simple encoding and decoding. 
-//	 
-//	        ImageReader reader = (ImageReader) readers.next();
-//	        Object source = bis; 
-//	        ImageInputStream iis = ImageIO.createImageInputStream(source); 
-//	        reader.setInput(iis, true);
-//	        ImageReadParam param = reader.getDefaultReadParam();
-//	 
-//	        Image image = reader.read(0, param);
-//	        //got an image file
-//	 
-//	        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
-//	        //bufferedImage is the RenderedImage to be written
-//	 
-//	        Graphics2D g2 = bufferedImage.createGraphics();
-//	        g2.drawImage(image, null, null);
-//	 
-//	        File imageFile = new File("image.jpg");
-//	        ImageIO.write(bufferedImage, "jpg", imageFile);
-//		
+//------End of Secret Message Stuff			
+
 //		ByteArrayInputStream in = new ByteArrayInputStream(secretMessage);
 //		BufferedImage bImageFromConvert = ImageIO.read(in);
 //		ImageIO.write(bImageFromConvert, "jpg", new File("image.jpg"));
